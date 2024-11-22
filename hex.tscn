@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://coddp5kk34bnq"]
+
+[ext_resource type="Script" path="res://hex.gd" id="1_6bscq"]
+[ext_resource type="Script" path="res://hexArea.gd" id="2_cfnrj"]
+[ext_resource type="Script" path="res://polygon_2d.gd" id="3_v4xxr"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_a3bwc"]
+points = PackedVector2Array(0, 100, 85.6, 50, 85.6, -50, 0, -100, -85.6, -50, -85.6, 50)
+
+[node name="Hex" type="Node2D"]
+script = ExtResource("1_6bscq")
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("2_cfnrj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("ConvexPolygonShape2D_a3bwc")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+unique_name_in_owner = true
+polygon = PackedVector2Array(0, 100, 85.6, 50, 85.6, -50, 0, -100, -85.6, -50, -85.6, 50)
+script = ExtResource("3_v4xxr")
+
+[connection signal="mouse_entered" from="Area2D" to="Polygon2D" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="Polygon2D" method="_on_area_2d_mouse_exited"]
